@@ -1,14 +1,22 @@
+#!/usr/bin/env python3
+"""
+MotionMuse AI Animation Generator
+Version: 1.2
+Requirements: pillow, numpy
+"""
+
 import argparse
 import os
-import numpy as np
-from PIL import Image, ImageDraw, ImageFont
+import sys
 import random
 import time
+import numpy as np
+from PIL import Image, ImageDraw, ImageFont
 
-# Font setup (use default system font)
+# Font setup (use default system font if arial is unavailable)
 try:
     font = ImageFont.truetype("arial.ttf", 24)
-except:
+except Exception:
     font = ImageFont.load_default()
 
 def generate_animation(prompt, duration, style, output_dir):
@@ -95,7 +103,7 @@ def add_cyberpunk_elements(draw, width, height, frame_num):
     # Grid lines
     for i in range(0, width, 20):
         alpha = int(100 + 100 * abs((frame_num/10 + i/50) % 2 - 1))
-        draw.line([(i, 0), (i, height)], fill=(0, 255, 255, alpha), width=1)
+        draw.line([(i, 0), (i, height)], fill=(0, 255, 255), width=1)
     
     # Moving neon shapes
     size = 50 + 20 * np.sin(frame_num/10)
@@ -112,8 +120,7 @@ def add_watercolor_elements(draw, width, height, frame_num):
         color = (
             random.randint(100, 200),
             random.randint(100, 200),
-            random.randint(150, 230),
-            180
+            random.randint(150, 230)
         )
         draw.ellipse([x-size, y-size, x+size, y+size], fill=color)
 
@@ -132,16 +139,50 @@ def add_pixel_elements(draw, width, height, frame_num):
                     )
                 )
 
-# ... (similar functions for anime and retro styles)
+def add_anime_elements(draw, width, height, frame_num):
+    # Speed lines
+    center_x, center_y = width // 2, height // 2
+    for angle in range(0, 360, 15):
+        rad = np.radians(angle + frame_num * 2)
+        r_inner = 50 + 10 * np.sin(frame_num / 5)
+        r_outer = 300
+        x1 = center_x + r_inner * np.cos(rad)
+        y1 = center_y + r_inner * np.sin(rad)
+        x2 = center_x + r_outer * np.cos(rad)
+        y2 = center_y + r_outer * np.sin(rad)
+        draw.line([(x1, y1), (x2, y2)], fill=(255, 200, 220), width=2)
+
+    # Star floating particle
+    x = center_x + 120 * np.cos(frame_num / 10)
+    y = center_y + 60 * np.sin(frame_num / 8)
+    draw.polygon([
+        (x, y - 15), (x + 5, y - 5), (x + 15, y), (x + 5, y + 5),
+        (x, y + 15), (x - 5, y + 5), (x - 15, y), (x - 5, y - 5)
+    ], fill=(255, 255, 100))
+
+def add_retro_elements(draw, width, height, frame_num):
+    # Horizon grid / Synthwave sun
+    sun_x, sun_y = width // 2, height // 2 - 20
+    draw.ellipse([sun_x - 60, sun_y - 60, sun_x + 60, sun_y + 60], fill=(255, 128, 0))
+    
+    # Horizon lines
+    for y in range(height // 2, height, 15):
+        offset_y = y + (frame_num % 15)
+        if offset_y < height:
+            draw.line([(0, offset_y), (width, offset_y)], fill=(255, 0, 128), width=2)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--prompt", type=str, required=True)
-    parser.add_argument("--duration", type=int, default=5)
-    parser.add_argument("--style", type=str, default="cyberpunk")
-    parser.add_argument("--output", type=str, required=True)
-    args = parser.parse_args()
-    
-    start_time = time.time()
-    generate_animation(args.prompt, args.duration, args.style, args.output)
-    print(f"Completed in {time.time() - start_time:.2f} seconds")
+    try:
+        parser = argparse.ArgumentParser()
+        parser.add_argument("--prompt", type=str, required=True)
+        parser.add_argument("--duration", type=int, default=5)
+        parser.add_argument("--style", type=str, default="cyberpunk")
+        parser.add_argument("--output", type=str, required=True)
+        args = parser.parse_args()
+
+        start_time = time.time()
+        generate_animation(args.prompt, args.duration, args.style, args.output)
+        print(f"Completed in {time.time() - start_time:.2f} seconds")
+    except Exception as e:
+        print(f"ERROR: {str(e)}")
+        sys.exit(1)
