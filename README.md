@@ -1,20 +1,9 @@
-# MotionMuse - Deployment Guide
-
-This guide explains how to deploy the MotionMuse clone to your cPanel hosting environmen
-
-## System Requirements
-- cPanel/Linux hosting with SSH access
-- PHP 8.0+
-- Python 3.9+
-- FFmpeg
-- MySQL/MariaDB (optional)
-
-### README.md - MotionMuse Clone Installation Guide
+### README.md - MotionMuse Installation Guide
 
 ```markdown
-# MotionMuse Clone - Deployment Guide
+# MotionMuse - Deployment Guide
 
-This guide explains how to deploy the MotionMuse clone to your cPanel hosting environment at `linkparty.info`.
+This guide explains how to deploy the MotionMuse clone to your cPanel hosting environment.
 
 ## System Requirements
 - cPanel/Linux hosting with SSH access
@@ -141,7 +130,7 @@ Add to `.htaccess`:
 4. Add social sharing features
 
 ---
-**Support**: For assistance, contact support@linkparty.info
+**Support**: For assistance, contact support@arixnetwork.com
 ```
 
 ### File: cleanup.php (Updated)
@@ -232,4 +221,4 @@ except Exception as e:
     sys.exit(1)
 ```
 
-This completes all files with installation instructions. The project is now ready for deployment to your cPanel hosting at linkparty.info!
+This completes all files with installation instructions. The project is now ready for deployment to your cPanel hosting!
