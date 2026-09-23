@@ -36,7 +36,56 @@ public_html/
 ├── .htaccess
 ├── ai-scripts/
 │   └── text2pose.py
+├── models/
+│   └── motionmuse/ (claymation, low_poly, film_noir, synthwave, sketch, fantasy, steampunk, vector, cyberpunk, watercolor, pixel_art, anime, retro_80s)
 └── temp/ (auto-created)
+```
+
+## Model Setup & Directory Pipeline
+
+To clone and set up all 13 MotionMuse models onto your Linux environment, follow these terminal instructions:
+
+### 1. Create the Directory Structure
+Run this `mkdir` command in your project root to generate the target folders for all 13 styles:
+```bash
+mkdir -p models/motionmuse/{claymation,low_poly,film_noir,synthwave,sketch,fantasy,steampunk,vector,cyberpunk,watercolor,pixel_art,anime,retro_80s}
+```
+
+### 2. Install Git LFS (If cloning from Hugging Face / Git)
+Large model files (`.safetensors`, `.ckpt`, `.bin`) require Git Large File Storage. Install it via your Linux package manager:
+
+- **Ubuntu / Debian**:
+  ```bash
+  sudo apt update && sudo apt install git-lfs -y
+  git lfs install
+  ```
+
+- **CentOS / RHEL / Fedora**:
+  ```bash
+  sudo dnf install git-lfs -y
+  git lfs install
+  ```
+
+### 3. Bulk Download via Linux Terminal
+If the models are hosted on a web server or cloud storage bucket, use `wget` or `curl` to loop through them automatically:
+```bash
+# Define the array of styles
+MODELS=("claymation" "low_poly" "film_noir" "synthwave" "sketch" "fantasy" "steampunk" "vector" "cyberpunk" "watercolor" "pixel_art" "anime" "retro_80s")
+
+# Base URL where your files are hosted
+BASE_URL="https://your-model-source.com"
+
+# Loop and download each one into its corresponding folder
+for model in "${MODELS[@]}"; do
+    echo "Downloading ${model}..."
+    wget -P "models/motionmuse/${model}/" "${BASE_URL}/${model}.safetensors"
+done
+```
+
+### 4. Adjust Permissions
+Ensure your web server or Python execution environment has read access to model files:
+```bash
+chmod -R 755 models/motionmuse/
 ```
 
 ## Installation & Deployment
