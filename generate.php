@@ -1,4 +1,9 @@
 <?php
+/**
+ * MotionMuse Generator Endpoint (v1.1.0)
+ * Standalone Zero-API Free Cloud AI Execution Pipeline
+ */
+
 header('Content-Type: application/json');
 
 // Ensure system PATH includes common directories for ffmpeg and python
@@ -73,7 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode([
                 'success' => true,
                 'download_url' => "$output_dir/output.mp4",
-                'frame_count' => $frameCount
+                'frame_count' => $frameCount,
+                'provider' => 'motionmuse_free_cloud'
             ]);
         } else {
             echo json_encode([

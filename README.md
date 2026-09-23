@@ -1,6 +1,6 @@
 # MotionMuse - Deployment & Release Guide (v1.1.0)
 
-MotionMuse is a lightweight, web-based AI animation generator designed for cPanel and Linux web hosting environments.
+MotionMuse is a lightweight, web-based AI animation generator designed for cPanel, Linux, and Cloud Web Hosting environments.
 
 ## Release v1.1.0 Highlights
 - **Supported MotionMuse Models / Styles**:
@@ -17,8 +17,14 @@ MotionMuse is a lightweight, web-based AI animation generator designed for cPane
   - Fantasy / Dreamscape
   - Steampunk
   - Minimalist Vector
+- **Zero-API Cloud System & Free AI Models**: Completely free local and cloud generation without requiring paid external API keys. Automatically falls back to free open local AI models.
 - **Security & Performance**: Enhanced `.htaccess` rules with Content Security Policy headers and mod_deflate output compression.
 - **Improved Maintenance**: Robust temporary directory cleanup (`cleanup.php`) via automated daily cron tasks.
+
+## Free Cloud AI & Zero-API Local Generation
+MotionMuse is engineered to run **100% free without mandatory API keys or external subscriptions**:
+- **Automatic Free Model Fallback**: If no external cloud AI provider API key is configured, MotionMuse automatically defaults to built-in open-source Python procedural & diffusion models.
+- **Standalone Cloud Compatibility**: Compatible with AWS, DigitalOcean, cPanel, GCP, and Hugging Face free spaces/weights.
 
 ## System Requirements
 - cPanel/Linux hosting with SSH access

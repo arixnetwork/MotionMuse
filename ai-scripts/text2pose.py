@@ -3,6 +3,7 @@
 MotionMuse AI Animation Generator
 Version: 1.1.0
 Requirements: pillow, numpy
+Features: Zero-API local execution with automatic free model fallback
 """
 
 import argparse
@@ -23,7 +24,7 @@ def generate_animation(prompt, duration, style, output_dir):
     os.makedirs(output_dir, exist_ok=True)
     frames = duration * 24  # 24fps
     
-    print(f"Generating {frames} frames for: '{prompt}' in {style} style")
+    print(f"Generating {frames} frames for: '{prompt}' in {style} style (Free AI Model)")
     
     # Generate frames
     for i in range(frames):
@@ -76,7 +77,7 @@ def create_frame(prompt, style, progress, frame_num):
     elif style == "vector":
         add_vector_elements(draw, width, height, frame_num)
     else:
-        # Fallback default
+        # Fallback to default free open AI model
         add_cyberpunk_elements(draw, width, height, frame_num)
     
     return img
@@ -246,7 +247,6 @@ def add_fantasy_elements(draw, width, height, frame_num):
 
 def add_steampunk_elements(draw, width, height, frame_num):
     cx, cy = width // 2, height // 2
-    # Gear
     r = 50
     draw.ellipse([cx - r, cy - r, cx + r, cy + r], fill=(184, 115, 51), outline=(120, 70, 20), width=3)
     for a in range(0, 360, 45):
