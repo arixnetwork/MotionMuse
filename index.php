@@ -31,8 +31,9 @@ header('Content-Type: text/html; charset=utf-8');
 <body class="gradient-bg">
     <div class="container py-5">
         <div class="card shadow-lg">
-            <div class="card-header bg-white">
-                <h1 class="text-center">🎬 MotionMuse Clone</h1>
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h1 class="h3 mb-0">🎬 MotionMuse Clone</h1>
+                <span class="badge bg-primary">v1.1.0</span>
             </div>
             <div class="card-body">
                 <form id="animationForm" action="generate.php" method="POST">
@@ -48,13 +49,21 @@ header('Content-Type: text/html; charset=utf-8');
                             <input type="number" name="duration" class="form-control" value="5" min="1" max="15">
                         </div>
                         <div class="col-md-6">
-                            <label>Style:</label>
+                            <label>Model / Style:</label>
                             <select name="style" class="form-select">
                                 <option value="cyberpunk">Cyberpunk</option>
                                 <option value="watercolor">Watercolor</option>
                                 <option value="pixel">Pixel Art</option>
                                 <option value="anime">Anime</option>
                                 <option value="retro">Retro 80s</option>
+                                <option value="claymation">3D Claymation</option>
+                                <option value="lowpoly">Low Poly 3D</option>
+                                <option value="noir">Film Noir</option>
+                                <option value="synthwave">Synthwave</option>
+                                <option value="sketch">Pencil Sketch</option>
+                                <option value="fantasy">Fantasy / Dreamscape</option>
+                                <option value="steampunk">Steampunk</option>
+                                <option value="vector">Minimalist Vector</option>
                             </select>
                         </div>
                     </div>
